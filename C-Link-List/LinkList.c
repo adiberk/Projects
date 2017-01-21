@@ -8,6 +8,7 @@ typedef struct node {
    struct node *next;
    int data;
    } LinkList;
+   // hello
 
 
 /*Function to allocate memory for a new vertex.*/
