@@ -1,6 +1,9 @@
 This Repository contains some minor projects I have been working on both in and out of school:
 
 List of projects:
+".metadata" contains info for eclipse:
+	- you can ignore it
+
 I have recently been learning C so I ddi two projects in C:
 	
 1. LinkList example in C with some other nice features
