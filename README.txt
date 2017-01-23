@@ -11,3 +11,4 @@ I have recently been learning C so I ddi two projects in C:
 2. Puzzle solver in C
 
 Upcomming project: Mark all mail as read (gmail, yahoo, aol)
+	- currently works, but needs work and comments.  Also, bug that will not allow you to use more than one account of the same provider with program
