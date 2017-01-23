@@ -1,8 +1,6 @@
 This Repository contains some minor projects I have been working on both in and out of school:
 
 List of projects:
-".metadata and .recommender" contains info for eclipse - am not sure what they are :(
-	- you can ignore it
 
 I have recently been learning C so I ddi two projects in C:
 	
