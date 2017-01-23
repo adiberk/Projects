@@ -52,8 +52,7 @@ public class Main {
 				while(scan.hasNextLine()){
 					provider = scan.nextLine();
 					if(provider.equals(mail.getProvider())){
-						break;
-					}
+					break;
 				}
 			    mark(provider,scan.nextLine(),scan.nextLine());
 			}

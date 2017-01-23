@@ -51,9 +51,8 @@ public class Main {
 				String provider = null;
 				while(scan.hasNextLine()){
 					provider = scan.nextLine();
-					if(provider.equals(mail.getProvider())){
-						break;
-					}
+					if(provider.equals(mail.getProvider()))
+					break;
 				}
 			    mark(provider,scan.nextLine(),scan.nextLine());
 			}
@@ -77,6 +76,7 @@ public class Main {
 	public static void mark(String provider, String username, String password) throws MessagingException, IOException, InterruptedException{
 		marking.marking();
 		Store emailStore = setConnection(provider, username, password);
+
 		Folder inbox = emailStore.getFolder("INBOX");
 		inbox.open(Folder.READ_WRITE);
 		Flags seen = new Flags(Flags.Flag.SEEN);
@@ -112,7 +112,7 @@ public class Main {
 			emailStore = emailSession.getStore("imaps");
 			emailStore.connect("imap."+provider+".com",username, crypt.decrypt(password));
 		} catch (Exception e) {
-			JLabel label = new JLabel("Error Connecting to mail");
+			JLabel label = new JLabel("Error Connecting to Gmail");
 			label.setSize(300, 30);
 			label.setLocation(20, 20);
 			marking.contentPane.remove(0);

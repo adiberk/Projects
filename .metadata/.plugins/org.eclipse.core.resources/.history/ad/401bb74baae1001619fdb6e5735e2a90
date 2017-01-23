@@ -79,9 +79,6 @@ public class MailProvider {
     	frame.dispose();
     }
     public String getProvider(){
-    	if (typeMail.getText().equals("yahoo")){
-    		return "mail.yahoo";
-    	}
     	return typeMail.getText();
     }
 }
