@@ -2,9 +2,10 @@ This Repository contains some minor projects I have been working on both in and 
 
 List of projects:
 	
-1. LinkList example in C with some other nice features
+1. Teaching Assistant Rails Application
 
-2. Puzzle solver in C
+2. LinkList example in C with some other nice features
 
-Upcomming project: Mark all mail as read (gmail, yahoo, aol)
-	- currently works, but needs work and comments.  Also, bug that will not allow you to use more than one account of the same provider with program
+3. Puzzle solver in C
+
+4. Mark all mail as read
