@@ -1,0 +1,9 @@
+development:
+  adapter: async
+
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: redis://redistogo:96883544f13284c758f1f7abee6211ef@barreleye.redistogo.com:11813/

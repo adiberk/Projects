@@ -1,0 +1,141 @@
+<%if user_signed_in?%>
+	<%if !is_ta_of_course(current_user, locals[:course])%>
+		<%=create_header(@days)%>
+		<div class = 'days-wrapper'>
+			<div class = 'hour-header'>
+			<%(0..parseHours(@hours).length-1).each do |count|%>
+				<div class = "hour-header-item <%=parseHours(@hours)[count]%>">
+					<h5 class = 'time-slots'><%=parseHours(@hours)[count]%></h5>
+				</div>
+			<% end %>
+			</div>
+			<%tas= locals[:course].tas%>
+			<%ta_appointments = get_confirmed_appointments(tas)%>
+			<%(0..@days.length-1).each do |count|%>
+				<div class = "day <%=@days[count]%>">
+
+				<%officehours = locals[:course].officehours%>
+				<%correct_hour = nil%>
+				<%(0..parseHours(@hours).length-1).each do |jcount|%>
+					<%correct_hour = off_hour(officehours, count, jcount)%>
+					<%correct_app = off_hour(ta_appointments, count, jcount)%>
+					<%hours = parseHours(@hours)[jcount]%>
+					<%if correct_hour!=nil%>
+						<div id = "cal-table" class = "hour correct_hour <%=parseHours(@hours)[jcount]%>">
+							<div class = 'time-added'>
+								<button type='button' id ='modal_btn' style = 'display:none' data-toggle='modal' data-target='#myModal'></button>
+								<%=render 'create_modal', :params => {hours: hours, course:locals[:course], days: @days[count]}%>
+								<h5 class = 'offhour'><%=User.find(correct_hour.ta_id).first_name%>
+								<%if correct_hour.online == true%>
+									<%=render 'shared/online'%>
+								<%end%>
+								</h5>
+								<h5>
+								<%hold = User.find(correct_hour.ta_id).ta_reviews%>
+								<%if hold.size > 0%>
+									<%hold = create_rating_icon(hold.first.score)%>
+								<%else%>
+									<%hold = create_rating_icon(nil)%>
+								<%end%>
+								 <%=hold%>
+								</h5>
+							</div>
+						</div>
+						<%correct_hour = nil%>
+					<% else %>
+						<%if correct_app!=nil && correct_app.start > Time.now%>
+							<div id = 'cal-table' class = "hour appointment_hour <%=parseHours(@hours)[jcount]%>">
+								<div class = 'time-added'>
+									<button type='button' id ='modal_btn' style = 'display:none' data-toggle='modal' data-target='#myModal'></button>
+									<%=render 'create_modal', :params => {hours: hours, course:locals[:course], days: @days[count]}%>
+									<h5 class = 'offhour'><%="Appointment with "%><%=User.find(correct_app.ta_id).first_name%>
+									</h5>
+								</div>
+							</div>
+							<%correct_app= nil%>
+						<%else%>
+							<div class = 'hour <%=parseHours(@hours)[jcount]%>', id = 'cal-table'>
+								<div class = 'time-added'>
+									<button type='button' id ='modal_btn' style = 'display:none' data-toggle='modal' data-target='#myModal'>
+									</button>
+									<%= render 'create_modal', :params => {hours: hours, course: locals[:course], days: @days[count]}%>
+								</div>
+							</div>
+						<% end %>
+					<% end %>
+				<%end%>
+				</div>
+			<% end %>
+		</div>
+	<% else %>
+		<%=create_header(@days)%>
+		<div class = 'days-wrapper'>
+			<div class = 'hour-header'>
+			<%(0..parseHours(@hours).length-1).each do |count|%>
+				<div class = "hour-header-item <%=parseHours(@hours)[count]%>">
+					<h5 class = 'time-slots'><%=parseHours(@hours)[count]%></h5>
+				</div>
+			<% end %>
+			</div>
+			<%tas= locals[:course].tas%>
+			<%ta_appointments = get_confirmed_appointments(tas)%>
+			<%(0..@days.length-1).each do |count|%>
+				<div class = "day <%=@days[count]%>">
+
+				<%officehours = locals[:course].officehours%>
+				<%correct_hour = nil%>
+				<%(0..parseHours(@hours).length-1).each do |jcount|%>
+					<%correct_hour = off_hour(officehours, count, jcount)%>
+					<%correct_app = off_hour(ta_appointments, count, jcount)%>
+					<%hours = parseHours(@hours)[jcount]%>
+					<%if correct_hour!=nil%>
+						<div id = "cal-table" class = "hour correct_hour <%=parseHours(@hours)[jcount]%>">
+							<div class = 'time-added'>
+								<button type='button' id ='modal_btn' style = 'display:none' data-toggle='modal' data-target='#myModal'></button>
+								<%=render 'update_modal', :params => {office_hour: correct_hour}%>
+								<h5 class = ''><%=User.find(correct_hour.ta_id).first_name%>
+								<%if correct_hour.online == true%>
+									<%=render 'shared/online'%>
+								<%end%>
+								</h5>
+								<h5>
+								<%hold = User.find(correct_hour.ta_id).ta_reviews%>
+								<%if hold.size > 0%>
+									<%hold = create_rating_icon(hold.first.score)%>
+								<%else%>
+									<%hold = create_rating_icon(nil)%>
+								<%end%>
+								<%=hold%>
+								</h5>
+							</div>
+						</div>
+						<%correct_hour = nil%>
+					<% else %>
+						<%if correct_app!=nil && correct_app.start>Time.now%>
+							<div id = 'cal-table' class = "hour <%=parseHours(@hours)[jcount]%>" style="background:#e59edd;">
+								<div class = 'time-added'>
+									<button type='button' id ='modal_btn' style = 'display:none' data-toggle='modal' data-target='#myModal'></button>
+									<%=render 'create_modal', :params => {hours: hours, course:locals[:course], days: @days[count]}%>
+									<h5 class = 'offhour'><%="Appointment with "%><%=User.find(correct_app.ta_id).first_name%>
+									</h5>
+
+								</div>
+							</div>
+							<%correct_app= nil%>
+						<%else%>
+							<div class = 'hour <%=parseHours(@hours)[jcount]%>', id = 'cal-table'>
+								<div class = 'time-added'>
+									<button type='button' id ='modal_btn' style = 'display:none' data-toggle='modal' data-target='#myModal'>
+									</button>
+									<%= render 'create_off_hour_modal', :params => {hours: hours, course: locals[:course], days: @days[count]}%>
+								</div>
+							</div>
+						<% end %>
+					<% end %>
+				<%end%>
+				</div>
+			<% end %>
+		</div>
+	<%end%>
+
+<%end%>

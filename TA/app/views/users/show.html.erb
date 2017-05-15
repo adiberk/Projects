@@ -1,0 +1,107 @@
+<% provide(:title, @user.first_name) %>
+
+<div class="col-sm-9">
+
+    <div class="col-sm-3" style = "width:19%">
+      <center>
+      <div class="user_name">
+        <p>
+          <% if @user.picture? %>
+          <%= image_tag @user.picture.url, class:"profile_image", size:150 %>
+          <% else %>
+          <%= image_tag Faker::Avatar.image, class:"profile_image", size:150 %>
+          <% end %>
+          <br>
+          <%= link_to "Change Photo", edit_user_path(current_user) %>
+          <h3> <%=@user.first_name%> <%=@user.last_name%></h3>
+        </p>
+      </div>
+      </center>
+    </div>
+
+    <div class="col-sm-9">
+      <div id="target" style="margin-right:0px;padding-right:0px; width: 850px; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; overflow-x:auto;">
+        <%= render 'cal_create'%> 
+      </div>
+      <div style = "float:right;text-align: left;">
+        <%=render 'shared/online'%>Online
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class = "row">
+      <div class = 'col-sm-11' style = "width: 97%;">
+        <ul class="nav nav-tabs mytab" role= "tablist">
+          <li class = "nav-item">
+            <li class = "nav-link active"><a data-toggle="tab" role = "tab" href="#student">Student</a></li>
+          </li>
+          <%if current_user.tacourses != nil && current_user.tacourses.size > 0%>
+            <li class = "nav-item">
+              <li class = "nav-link"><a data-toggle="tab" href="#ta" role = "tab">TA</a></li>
+            </li>
+          <%end%>
+        </ul>
+      <div class = "tab-content">
+        <div id="student" class = "tab-pane fade in active" role = "tabpanel">
+          <div class="row">
+            <div class="course_appoint col-sm-12">
+              <p>
+                <strong>Courses</strong>
+                <ul>
+                  <% course_list = current_user().courses %>
+                  <% course_list.each do |c| %>
+                    <li> <%= link_to "#{c.name} (#{c.abbrev})", :controller => "courses", :action =>"show", :id=>"#{c.id}", :course_name=>"#{c.name}", class: 'basiclink' %> </li>
+                  <% end %>
+                </ul>
+              </p>
+              <hr>
+            </div>
+            <div id='appointments'>
+              <%=render 'student_appointments'%>
+            </div>
+          </div>
+        </div>
+
+        <%if current_user.tacourses != nil && current_user.tacourses.size > 0%>
+          <div id="ta" class="tab-pane fade" role = "tabpanel">
+            <div class="row">
+              <div class="course_appoint col-sm-12">
+                <p>
+                  <strong>Courses</strong>
+                  <ul>
+                    <% course_list = current_user().tacourses %>
+                    <% course_list.each do |c| %>
+                      <li> <%= link_to "#{c.name}, (#{c.abbrev})", :controller => "courses", :action =>"show", :id=>"#{c.id}", :course_name=>"#{c.name}", class: 'basiclink' %> </li>
+                    <% end %>
+                  </ul>
+                </p>
+                <hr>
+              </div>
+              <div id='ta_appointments'>
+                <%=render 'ta_appointments'%>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <br>
+    <br>
+	</div>
+</div>
+
+<script>
+    $('.schedule').on('selectionmade', function() {
+      console.log("Selection Made");
+
+    }).on('selectionremoved', function() {
+      console.log("Selection Removed");
+    });
+    $(document).ready( function() {
+      var mousedown = false;
+      var devarionMode = false;
+      $('.hour').on('mousedown', function(event) {
+        $(this).children().children('div:nth-child(2)').modal('show');
+      })
+    });
+</script>
+

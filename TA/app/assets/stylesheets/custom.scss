@@ -1,0 +1,610 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. --for debugging*/
+$gray-medium-light: #eaeaea;
+.thumbnail {
+    padding:0px;
+    border: 0px;
+}
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* miscellaneous */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* universal */
+
+body {
+  // padding-top: 60px;
+  margin-top: 0 !important;
+  margin-left:15px;
+  margin-right:15px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* forms */
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  border:none;
+  width:100%;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+.field_with_errors {
+  background-color: white;
+  display:block;
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+
+/* header */
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 15px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #808080;
+  text-decoration: none;
+  background-color:transparent;
+}
+.glyphicon{
+    // font-family: 'Glyphicons Halflings';
+    font-family:'Glyphicons Halflings',verdana, arial, helvetica, sans-serif;
+}
+/*home logo*/
+.home-image{
+  position: relative;
+  background: url('https://static1.squarespace.com/static/54d011cee4b00667cb0d9405/t/54efaeafe4b0cdb011371bda/1424993969774/hrdarkblue.jpg?format=1500w') center;
+  // width: 100%;
+  // height: 100%;
+  background-size: cover;
+  overflow: hidden;
+  padding-left:15px;
+  padding-right:15px;
+}
+.home-image h1{
+  color: #fff;
+
+}
+.home-image h2{
+  color: rgb(0, 0, 0);
+}
+.home-image .container{
+  // background: #9F9898;
+  background: rgba(159,152,152,0.5);
+  -pie-background:  rgba(159,152,152, 0.5);
+  behavior: url(PIE.htc);
+   // z-index: -1;
+   // position:absolute;
+}
+.jumbo-row{
+  margin:0px;
+}
+.home-image{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+/*body*/
+h2 > .btn-primary{ //homepage btn
+  color:white;
+}
+
+.sidebar{
+  // padding-left: 0;
+}
+
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #6f6;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+  margin:0;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+/*User page appointment setup css*/
+#confirm_app{
+  .confirm_btn{
+    margin-bottom: 0px;
+  }
+}
+
+/*Calendar settings that were in js*/
+
+.header{
+    height: 30px;
+    width: 100%;
+    background: transparent;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.align-block{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    margin: 3px;
+}
+
+// Style Header Items
+.header-item{
+    width: 100%;
+    height: 100%;
+    margin: 2px; // option
+}
+.header h3 {
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    color:black;
+    top: 50%;
+    font-family: Montserrat;
+    font-size: 1em;
+    font-weight: 100;
+    transform: translateY(-50%);
+    user-select: none;
+}
+
+.hour-header{
+    display: flex;
+    flex-direction: column;
+    margin: 2px;// option
+    margin-right: 1px;
+    background: transparent;
+    width: 100%;
+    min-width: 100px;
+}
+
+.days-wrapper{
+    width: 100%;
+    // height: 100%;
+    height: 500px!important;
+    background: transparent; //option
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    overflow:auto;
+}
+.days-wrapper-user{
+    width: 100%;
+    // height: 100%;
+    height: 344px!important;
+    background: transparent; //option
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    overflow:auto;
+}
+.hour-header-item {
+    min-height: 50px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 1px;
+    border: 1px white;
+    border-style: solid;
+}
+
+.hour-header-item h5 {
+    color: black;
+    margin: 0;
+    text-align: right;
+    vertical-align: middle;
+    position: relative;
+    top: 15%;
+    font-family: Montserrat;
+    font-size: 1em;
+    font-weight: 100;
+    transform: translateY(-50%);
+    padding-right: 5%;
+    user-select: none;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    background: transparent;
+    min-width: 100px;
+    width:100%;
+}
+.hour{
+    // background: #dfd; // option
+    border-style: solid;
+    border-width: thin;
+    border-color: #E0E0E0;
+    margin-bottom: 0px;
+
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    max-height: 100px;
+    min-height: 50px;
+}
+
+.selected {
+  background: #9aa7ee!important;
+}
+.disabled {
+  pointer-events: none !important;
+  opacity: 0.3 !important;
+  box-shadow: none !important;
+}
+
+/*calendar settings*/
+// .cal-header{
+//   padding: 0px 0px 0px 7px;
+//   width: 15%;
+//   margin-left: -15px;
+//   margin-right:-15px;
+// }
+.row-hour{
+      margin-bottom: 2px;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      max-height: 100px;
+      min-height: 100px;
+}
+
+
+.cal-header{
+   margin-bottom: 2px;
+   width: 100%;
+   height: 100%;
+   user-select: none;
+   max-height: 100px;
+   min-height: 100px;
+   margin-left: 0px;
+}
+.row-header{
+    width:100%;
+}
+.correct_hour{
+  background-color: #D2E9F7;
+  color: #457EAC;
+  padding-left: 5px;
+  border-left-color: #59A8E2;
+  border-left-width: 2px;
+
+}
+.appointment_hour{
+  background-color: #F1E4F6;
+  color: #744885;
+  padding-left: 5px;
+  border-left-color: #C080DC;
+  border-left-width: 2px;
+
+}
+.offhour{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/*end of calendar settings*/
+
+/* User sign in and sign forms. */
+.border-form-div {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.border-form-div .form-signin-heading,
+.border-form-div .checkbox {
+  margin-bottom: 10px;
+}
+.border-form-div input[type="text"],
+.border-form-div input[type="email"],
+.border-form-div input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+
+
+
+.divedge {
+  border-radius: 7px;
+}
+
+
+// sidebar
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.content{
+  max-width: 80%;
+  margin: auto;
+}
+.course_appoint{
+
+}
+
+nav > h3 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+nav > h5 {
+  font-size: 1em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+.tasidebar {
+  color: #777;
+}
+
+
+/* Link Styles */
+.link-style {
+  text-decoration: none;
+  color: #4477aa;
+
+}
+
+
+
+.test {
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+}
+
+/* Chat index styling */
+
+$c:  #ffffff;
+$b: #4f90c1;
+
+.chatlist{
+
+  margin: 3px;
+  width: 120px;
+
+  cursor: pointer;
+  user-select: none;
+  transition: all 60ms ease-in-out;
+
+  color: #fff;
+  border: 0 none;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+
+  &:hover {
+    transition: all 60ms ease;
+    opacity: .85;
+  }
+
+  color: $c;
+  background: $b;
+
+}
+
+.chatdiv {
+  height: 500px;
+  width: 180px;
+  overflow-x: hidden;
+}
+
+.chattitle {
+  color: #333030;
+}
+
+// button styles
+.basiclink {
+  color: #fff;
+  border: 0 none;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+}
+
+.online_sym{
+  display: inline;
+  float: left;
+  text-align: bottom;
+}
+
+.profile_image {
+  border: 3px solid #e5e5e5;
+}
+
+
+.chat_section {
+  font-size: 1.3em;
+  line-height: 3;
+}
+
+
+
+#introduction {
+    padding-left: 300px;
+}
+#review{
+  margin-top:30px;
+  margin-bottom:30px;
+
+}
+
+// footer
+.copyright { min-height:40px; background-color:#000000;}
+.copyright p { text-align:left; color:#FFF; padding:10px 0; margin-bottom:0px;}
+.bottom_ul { list-style-type:none; float:right; margin-bottom:0px;}
+.bottom_ul li { float:left; line-height:40px;}
+.bottom_ul li:after {  color:#FFF; margin-right:8px; margin-left:8px;}
+.bottom_ul li a { color:#FFF;  font-size:12px;}
+
+/*edit tabs on user page*/
+ul.mytab{
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.tabcontent{
+  border-top:none;
+}
+/*done editing tabs on user page*/
+
+.participants {
+  align-content: center;
+  padding-left: 30%;
+}

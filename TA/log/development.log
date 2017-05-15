@@ -1,0 +1,1172 @@
+DEPRECATION WARNING: Passing #original_exception is deprecated and has no effect. Exceptions will automatically capture the original exception. (called from require at /mnt/c/Users/berko/Documents/Adi Berkowitz/TA/bin/rails:9)
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "appointments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "student_id" integer, "ta_id" integer, "start" datetime, "end" datetime, "confirmed" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "recipient_id" integer, "sender_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_conversations_on_recipient_id_and_sender_id" ON "conversations" ("recipient_id", "sender_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE  INDEX "index_conversations_on_recipient_id" ON "conversations" ("recipient_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_conversations_on_recipient_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_conversations_on_recipient_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE  INDEX "index_conversations_on_sender_id" ON "conversations" ("sender_id")[0m
+  [1m[35m (14.3ms)[0m  [1m[35mCREATE TABLE "courses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "major_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "abbrev" varchar, "description" text, "teacher" varchar)[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "enrollment_tas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE TABLE "enrollments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "course_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "majors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "university_id" integer, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "user_id" integer, "conversation_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (14.3ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_conversation_id" ON "messages" ("conversation_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_messages_on_conversation_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_messages_on_conversation_id' AND type='index'
+[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "officehours" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "ta_id" integer, "start" datetime, "end" datetime, "online" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (14.0ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_id" integer, "ta_id" integer, "score" float, "review" text, "course_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (14.7ms)[0m  [1m[35mCREATE TABLE "universities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "username" varchar, "university_id" integer, "online" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "confirmation_token" varchar, "confirmed_at" datetime, "confirmation_sent_at" datetime, "unconfirmed_email" varchar, "picture" varchar)[0m
+  [1m[35m (9.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (10.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (8.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170507190134)[0m
+  [1m[35m (13.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170309003426),
+(20170309003744),
+(20170309004736),
+(20170309060431),
+(20170310061851),
+(20170328214454),
+(20170328214548),
+(20170331190307),
+(20170404150211),
+(20170414015832),
+(20170415181947),
+(20170415212631),
+(20170423160137),
+(20170423164441),
+(20170424214322),
+(20170427154843),
+(20170427154904),
+(20170506210359),
+(20170507173958),
+(20170507185449);
+
+[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (2.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "appointments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "student_id" integer, "ta_id" integer, "start" datetime, "end" datetime, "confirmed" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (12.2ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "recipient_id" integer, "sender_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (12.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_conversations_on_recipient_id_and_sender_id" ON "conversations" ("recipient_id", "sender_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE  INDEX "index_conversations_on_recipient_id" ON "conversations" ("recipient_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_conversations_on_recipient_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_conversations_on_recipient_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_conversations_on_recipient_id_and_sender_id' AND type='index'
+[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE  INDEX "index_conversations_on_sender_id" ON "conversations" ("sender_id")[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE TABLE "courses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "major_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "abbrev" varchar, "description" text, "teacher" varchar)[0m
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE TABLE "enrollment_tas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "enrollments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "course_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "majors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "university_id" integer, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "user_id" integer, "conversation_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_conversation_id" ON "messages" ("conversation_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_messages_on_conversation_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_messages_on_conversation_id' AND type='index'
+[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "officehours" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "course_id" integer, "ta_id" integer, "start" datetime, "end" datetime, "online" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_id" integer, "ta_id" integer, "score" float, "review" text, "course_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "universities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "username" varchar, "university_id" integer, "online" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "confirmation_token" varchar, "confirmed_at" datetime, "confirmation_sent_at" datetime, "unconfirmed_email" varchar, "picture" varchar)[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (7.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170507190134)[0m
+  [1m[35m (7.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170309003426),
+(20170309003744),
+(20170309004736),
+(20170309060431),
+(20170310061851),
+(20170328214454),
+(20170328214548),
+(20170331190307),
+(20170404150211),
+(20170414015832),
+(20170415181947),
+(20170415212631),
+(20170423160137),
+(20170423164441),
+(20170424214322),
+(20170427154843),
+(20170427154904),
+(20170506210359),
+(20170507173958),
+(20170507185449);
+
+[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (5.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (8.2ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[35mSQL (6.8ms)[0m  [1m[31mDELETE FROM "courses"[0m
+  [1m[35mSQL (7.2ms)[0m  [1m[31mDELETE FROM "universities"[0m
+  [1m[35mSQL (6.8ms)[0m  [1m[31mDELETE FROM "majors"[0m
+  [1m[35mSQL (7.5ms)[0m  [1m[31mDELETE FROM "enrollments"[0m
+  [1m[35mSQL (7.0ms)[0m  [1m[31mDELETE FROM "enrollment_tas"[0m
+  [1m[35mSQL (7.0ms)[0m  [1m[31mDELETE FROM "officehours"[0m
+  [1m[35mSQL (7.2ms)[0m  [1m[31mDELETE FROM "reviews"[0m
+  [1m[35mSQL (7.0ms)[0m  [1m[31mDELETE FROM "appointments"[0m
+  [1m[35mSQL (13.7ms)[0m  [1m[31mDELETE FROM "conversations"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "universities" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 1], ["name", "Brandeis Univeristy"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "universities" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 2], ["name", "Boston University"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "universities" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 3], ["name", "Boston College"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (8.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "universities" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 4], ["name", "Northeastern University"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "universities" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["id", 5], ["name", "Harvard University"], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (6.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "nick@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "nick"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Nick"], ["last_name", "April"], ["username", "nick"], ["university_id", 1], ["created_at", 2017-05-15 04:26:37 UTC], ["updated_at", 2017-05-15 04:26:37 UTC], ["email", "nick@brandeis.edu"], ["encrypted_password", "$2a$11$7Y6PCTvIWglxATeANIWE7ObnmuUd0L4.yPowAAGqz3W7aiAo0aehC"], ["confirmed_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (7.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "adi@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "adi"], ["LIMIT", 1]]
+  [1m[35mSQL (2.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Adi"], ["last_name", "Berkowitz"], ["username", "adi"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "adi@brandeis.edu"], ["encrypted_password", "$2a$11$pCHa7EdEfEr2YTbwaWuDW.0ehOgt/NORa4dtgtSMwUIb6/aJYO4gu"], ["confirmed_at", 2017-05-15 04:26:37 UTC]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "haowang@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "hao"], ["LIMIT", 1]]
+  [1m[35mSQL (2.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Hao"], ["last_name", "Wang"], ["username", "hao"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "haowang@brandeis.edu"], ["encrypted_password", "$2a$11$qo/e8CnPisyzvoWEQt/MceJ4yRN1hq8Y9QSXmRThMDCaGP.aCDWOq"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "stacydean@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "stacy"], ["LIMIT", 1]]
+  [1m[35mSQL (2.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Stacy"], ["last_name", "Dean"], ["username", "stacy"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "stacydean@brandeis.edu"], ["encrypted_password", "$2a$11$ZTPNDW.N2/T3Iw.oBylASOSXnTRe/XZYO8uB28b5RZTOaF6pagTs2"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "fannyferguson@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "fanny"], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Fanny"], ["last_name", "Ferguson"], ["username", "fanny"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "fannyferguson@brandeis.edu"], ["encrypted_password", "$2a$11$xU.8PyQT2NZrC.kuGFAeuO46qw26E7rh//ZpfCecdUKJOr1dq7dBG"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (12.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "douglassculotta@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "douglassculotta"], ["LIMIT", 1]]
+  [1m[35mSQL (2.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Douglass"], ["last_name", "Culotta"], ["username", "douglassculotta"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "douglassculotta@brandeis.edu"], ["encrypted_password", "$2a$11$D2eefqxznhfWjIb6rvxbXuiBtKNe/ukiqeOIimisUg7/3pGMzY7Sa"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (13.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "alibogen@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "alibogen"], ["LIMIT", 1]]
+  [1m[35mSQL (2.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Ali"], ["last_name", "Bogen"], ["username", "alibogen"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "alibogen@brandeis.edu"], ["encrypted_password", "$2a$11$5elWCzASttSR6NlkRVeCk.OwqyzXinBN2/IwwGR51nPphzIEQipHa"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "vitatellis@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "vitatellis"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Vita"], ["last_name", "Tellis"], ["username", "vitatellis"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "vitatellis@brandeis.edu"], ["encrypted_password", "$2a$11$iIXqQJ.NXnpX9jgMyAr3sOLQKE9UN.zPOs8f/HHXTWuAg1Nv3OxAa"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "lauriepenfold@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "lauriepenfold"], ["LIMIT", 1]]
+  [1m[35mSQL (2.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Laurie"], ["last_name", "Penfold"], ["username", "lauriepenfold"], ["university_id", 1], ["created_at", 2017-05-15 04:26:38 UTC], ["updated_at", 2017-05-15 04:26:38 UTC], ["email", "lauriepenfold@brandeis.edu"], ["encrypted_password", "$2a$11$oqe5PgxG21MO.uktuJxNxOERZyKa5RH3NnX95ph.QwfCGjVCaRC2m"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "madlynlasko@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "madlynlasko"], ["LIMIT", 1]]
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Madlyn"], ["last_name", "Lasko"], ["username", "madlynlasko"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "madlynlasko@brandeis.edu"], ["encrypted_password", "$2a$11$VqcIqJ02Vi0xcpSFscE82uLg4pNE3yaRrCsDnjOCFTjOdbaV2SoVy"], ["confirmed_at", 2017-05-15 04:26:38 UTC]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "edelmirabarajas@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "edelmirabarajas"], ["LIMIT", 1]]
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Edelmira"], ["last_name", "Barajas"], ["username", "edelmirabarajas"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "edelmirabarajas@brandeis.edu"], ["encrypted_password", "$2a$11$QG3RO1BZ.9Yv/JR5K0LE1uMzd5w8XigEWOy9lz1oR.2KoU7WmnsJq"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (5.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "melodymixer@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "melodymixer"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Melody"], ["last_name", "Mixer"], ["username", "melodymixer"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "melodymixer@brandeis.edu"], ["encrypted_password", "$2a$11$Kg2eAe9G5AP2SNrqKIHJXenXhDKJgs82.gNbKQfzFkmdgFxxfYbYC"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (6.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "tarenhartl@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "tarenhartl"], ["LIMIT", 1]]
+  [1m[35mSQL (2.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Taren"], ["last_name", "Hartl"], ["username", "tarenhartl"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "tarenhartl@brandeis.edu"], ["encrypted_password", "$2a$11$75di4YMNPao8TpqFDvKIG.cNfBh5dugTZ0BBzJS.BUylYVyJ1VFv2"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "alfonzobrauer@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "alfonzobrauer"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Alfonzo"], ["last_name", "Brauer"], ["username", "alfonzobrauer"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "alfonzobrauer@brandeis.edu"], ["encrypted_password", "$2a$11$fqVirgE580qnPxrKkfuP1eiJAMeaaYxxplnVNmCAHniFDZPFze/eK"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (5.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sookreiher@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "sookreiher"], ["LIMIT", 1]]
+  [1m[35mSQL (2.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Sook"], ["last_name", "Reiher"], ["username", "sookreiher"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "sookreiher@brandeis.edu"], ["encrypted_password", "$2a$11$f2vnfCxyLRw34xbqZW7aUe1u.eojM7ZxHm47WuGdvD4dh61t3An5O"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "shanitaboze@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "shanitaboze"], ["LIMIT", 1]]
+  [1m[35mSQL (2.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Shanita"], ["last_name", "Boze"], ["username", "shanitaboze"], ["university_id", 1], ["created_at", 2017-05-15 04:26:39 UTC], ["updated_at", 2017-05-15 04:26:39 UTC], ["email", "shanitaboze@brandeis.edu"], ["encrypted_password", "$2a$11$bcjA8aJB2wz.4WQDrV1J7OeY4arpl0HO76hMk..qggXV0IrDFE7z6"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (13.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "karylarue@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "karylarue"], ["LIMIT", 1]]
+  [1m[35mSQL (2.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Kary"], ["last_name", "Larue"], ["username", "karylarue"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "karylarue@brandeis.edu"], ["encrypted_password", "$2a$11$XQWOQ0vPTBOmp74rFsrk/O12jGApzVCgSAFaPnEzrtodjPb8cEbNq"], ["confirmed_at", 2017-05-15 04:26:39 UTC]]
+  [1m[35m (13.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "clairedingee@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "clairedingee"], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Claire"], ["last_name", "Dingee"], ["username", "clairedingee"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "clairedingee@brandeis.edu"], ["encrypted_password", "$2a$11$CNdEAm9p1LZkk8N6xXDx8uIZ8zKzWI9k35aDVLrCEjbI6MC6tlE/C"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (8.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "joniburrow@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "joniburrow"], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Joni"], ["last_name", "Burrow"], ["username", "joniburrow"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "joniburrow@brandeis.edu"], ["encrypted_password", "$2a$11$pRZw6EMFZZh7GmtR.0KAAOdScQEL97aoz7R2lka2/o2gu50SqVBH2"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (6.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "rosettatellier@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "rosettatellier"], ["LIMIT", 1]]
+  [1m[35mSQL (2.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Rosetta"], ["last_name", "Tellier"], ["username", "rosettatellier"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "rosettatellier@brandeis.edu"], ["encrypted_password", "$2a$11$rEYhLQ1/0/YawwpFs0JKr..CXrWst4gEx7fXwP0lsBWTuJcdVFGtm"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (12.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "thomasinabond@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "thomasinabond"], ["LIMIT", 1]]
+  [1m[35mSQL (2.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Thomasina"], ["last_name", "Bond"], ["username", "thomasinabond"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "thomasinabond@brandeis.edu"], ["encrypted_password", "$2a$11$RXAqib1Dp1B2/YPIjqqJYuuid5fMfmCrH1meh/SVN6CurlOQwy3Q6"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marciedemaria@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "marciedemaria"], ["LIMIT", 1]]
+  [1m[35mSQL (2.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Marcie"], ["last_name", "Demaria"], ["username", "marciedemaria"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "marciedemaria@brandeis.edu"], ["encrypted_password", "$2a$11$/ZVkzNtNXT/8TeGqiZ3kxebEoyXsApfGVP46N49rOUYleVDJneCoa"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "sharronshue@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "sharronshue"], ["LIMIT", 1]]
+  [1m[35mSQL (2.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Sharron"], ["last_name", "Shue"], ["username", "sharronshue"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "sharronshue@brandeis.edu"], ["encrypted_password", "$2a$11$bsExj8JSiFQhd4nOIeV34O/6LYuOvsumuH70l0noHu.QYIxCoCbKC"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (9.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "denisbarone@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "denisbarone"], ["LIMIT", 1]]
+  [1m[35mSQL (2.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Denis"], ["last_name", "Barone"], ["username", "denisbarone"], ["university_id", 1], ["created_at", 2017-05-15 04:26:40 UTC], ["updated_at", 2017-05-15 04:26:40 UTC], ["email", "denisbarone@brandeis.edu"], ["encrypted_password", "$2a$11$a9QeOs2eu/3NLzWKdC4MtOOOkCehnJlAxacX2kqvJUt1G5D6Xxl5K"], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "susyozment@brandeis.edu"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "susyozment"], ["LIMIT", 1]]
+  [1m[35mSQL (2.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "university_id", "created_at", "updated_at", "email", "encrypted_password", "confirmed_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Susy"], ["last_name", "Ozment"], ["username", "susyozment"], ["university_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["email", "susyozment@brandeis.edu"], ["encrypted_password", "$2a$11$lPJoBRUSdlBudtR/jlvmOOC5P4bSkqX5xZZDQiQq7Cyy0IUeuc3f."], ["confirmed_at", 2017-05-15 04:26:40 UTC]]
+  [1m[35m (5.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "majors" ("id", "university_id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 1], ["university_id", 1], ["name", "Computer Science"], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (5.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "majors" ("id", "university_id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 2], ["university_id", 1], ["name", "Economics"], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "majors" ("id", "university_id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 3], ["university_id", 1], ["name", "Mathmatic"], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (5.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 1], ["name", "Capstone Project"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "CP"], ["description", "Teaches modern software engineering concepts, emphasizing rapid prototyping, unit testing, usability testing, and collaborative software development principles. Students apply these concepts by building a complex software system in small teams of programmers/developers using current platforms and technologies."], ["teacher", "Mr. Salas"]]
+  [1m[35m (7.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 2], ["name", "Data Structures"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "DS"], ["description", "An introduction to the fundamental concepts of computation: discrete structures (sets, relations, functions, sequences, graphs), the fundamental data structures and algorithms for sorting and searching (lists, queues, dequeues, heaps, hashing, binary trees, tries), and the analysis of algorithms (predicate logic, termination and correctness proofs, computational complexity)."], ["teacher", "Mr. Storer"]]
+  [1m[35m (11.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 3], ["name", "Mobile App"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "MA"], ["description", "Introduces the design and analysis of mobile applications that covers the architecture of mobile devices, APIs for graphical user interfaces on mobile devices, location-aware computing, social networking. Also covers the theory and practice of space and time optimization for these relatively small and slow devices."], ["teacher", "Ms. Chaturvedi"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 4], ["name", "Macroeconomics"], ["major_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "Ma"], ["description", "Introduces the field of macroeconomics. Macroeconomics is the study of the overall or aggregate economic performance of national economies. "], ["teacher", "Mr. Redenius"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 5], ["name", "Algebra"], ["major_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "Al"], ["description", "Groups, rings, modules, Galois theory, affine rings, and rings of algebraic numbers. Multilinear algebra. The Wedderburn theorems. Other topics as time permits."], ["teacher", "Mr. Bellaïche"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 6], ["name", "Discrete Math"], ["major_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "DM"], ["description", "Covers topics in discrete mathematics with applications within computer science. Some of the topics to be covered include graphs and matrices; principles of logic and induction; number theory; counting, summation, and recurrence relations; discrete probability."], ["teacher", "Mr. Cherniack"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 7], ["name", "Linear Algebra"], ["major_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "LA"], ["description", "Matrices, determinants, linear equations, vector spaces, eigenvalues, quadratic forms, linear programming. Emphasis on techniques and applications."], ["teacher", "Mr. Matveev"]]
+  [1m[35m (12.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 8], ["name", "Calculus"], ["major_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "Ca"], ["description", "Introduction to differential (and some integral) calculus of one variable, with emphasis on techniques and applications."], ["teacher", "Mr. Merril"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 9], ["name", "Information Retrieval"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "IR"], ["description", "Explores the theory and practice of textual information retrieval, including text indexing; Boolean, vector space and probabilistic retrieval models; evaluation; interfaces; linguistic issues; web search; QA and text classification. Students will implement algorithms and design and build a search-based application."], ["teacher", "Mr. Anick"]]
+  [1m[35m (7.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 10], ["name", "Operating Systems"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "OS"], ["description", "Fundamental structures of a computer system from hardware abstractions through machine and assembly language, to the overall structure of an operating system and key resource management abstractions."], ["teacher", "Ms. Shrira"]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 11], ["name", "Database Management Systems"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "DMS"], ["description", "Introduces database structure, organization, and languages. Studies relational and object-oriented models, query languages, optimization, normalization, file structures and indexes, concurrency control and recovery algorithms, and distributed databases."], ["teacher", "Mr. Cherniack"]]
+  [1m[35m (9.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 12], ["name", "Algorithms"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "Al"], ["description", "Basic concepts in the design and analysis of algorithms."], ["teacher", "Mr. Storer"]]
+  [1m[35m (10.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 13], ["name", "Scientific Data Processing in Matlab"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "SDPiM"], ["description", "Introduces scientific computing using Matlab. Programming concepts such as data types, vectors, conditional execution, loops, procedural abstraction, modules, APIs are presented. The course will present scientific techniques relevant to computational science, with an emphasis on image processing."], ["teacher", "Ms. DiLillo"]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "courses" ("id", "name", "major_id", "created_at", "updated_at", "abbrev", "description", "teacher") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 14], ["name", "Advanced Programming Techniques"], ["major_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC], ["abbrev", "APT"], ["description", "An introduction to fundamental programming techniques covering basic software engineering, object oriented programming, interfaces, APIs and abstract classes, with applications to Graphical User Interfaces, web programming, graphics, and other topics."], ["teacher", "Ms. Papaemmanouil"]]
+  [1m[35m (6.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.1ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 1], ["course_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 1], ["user_id", 1], ["course_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 1], ["course_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 2], ["user_id", 1], ["course_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (12.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 5], ["user_id", 2], ["course_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 22], ["user_id", 2], ["course_id", 4], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 3], ["course_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 3], ["user_id", 3], ["course_id", 4], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 5], ["course_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 4], ["user_id", 5], ["course_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.4ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 5], ["course_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 6], ["user_id", 5], ["course_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (5.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.4ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 5], ["course_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 7], ["user_id", 5], ["course_id", 5], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (10.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 12], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 8], ["user_id", 6], ["course_id", 12], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 9], ["user_id", 6], ["course_id", 7], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 10], ["user_id", 6], ["course_id", 5], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (11.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 7], ["course_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 11], ["user_id", 7], ["course_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 7], ["course_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 12], ["user_id", 7], ["course_id", 8], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 7], ["course_id", 11], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 13], ["user_id", 7], ["course_id", 11], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 14], ["user_id", 8], ["course_id", 4], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 13], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 15], ["user_id", 8], ["course_id", 13], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 16], ["user_id", 8], ["course_id", 6], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 9], ["course_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 17], ["user_id", 9], ["course_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 9], ["course_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 18], ["user_id", 9], ["course_id", 4], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 9], ["course_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 19], ["user_id", 9], ["course_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 10], ["course_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 20], ["user_id", 10], ["course_id", 4], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 16], ["course_id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "enrollments" ("id", "user_id", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 21], ["user_id", 16], ["course_id", 7], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.3ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 1], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 1], ["course_id", 1], ["user_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 3], ["course_id", 1], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 2], ["course_id", 1], ["user_id", 3], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 2], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 3], ["course_id", 2], ["user_id", 2], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 1], ["course_id", 4], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 4], ["course_id", 4], ["user_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 1], ["course_id", 5], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 5], ["course_id", 5], ["user_id", 1], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 4], ["course_id", 3], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 20], ["course_id", 3], ["user_id", 4], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 5], ["course_id", 4], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 21], ["course_id", 4], ["user_id", 5], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 13], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 6], ["course_id", 13], ["user_id", 6], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 8], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 7], ["course_id", 8], ["user_id", 6], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 1], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 8], ["course_id", 1], ["user_id", 6], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 6], ["course_id", 2], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 9], ["course_id", 2], ["user_id", 6], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 7], ["course_id", 4], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 10], ["course_id", 4], ["user_id", 7], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 7], ["course_id", 12], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 11], ["course_id", 12], ["user_id", 7], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 9], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 12], ["course_id", 9], ["user_id", 8], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.3ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 7], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 13], ["course_id", 7], ["user_id", 8], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.3ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 3], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.6ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 14], ["course_id", 3], ["user_id", 8], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 9], ["course_id", 11], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 15], ["course_id", 11], ["user_id", 9], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 9], ["course_id", 10], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 16], ["course_id", 10], ["user_id", 9], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.3ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 9], ["course_id", 7], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 17], ["course_id", 7], ["user_id", 9], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (5.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.3ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 10], ["course_id", 7], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 18], ["course_id", 7], ["user_id", 10], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollment Load (0.2ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 10], ["course_id", 10], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "enrollment_tas" ("id", "course_id", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 19], ["course_id", 10], ["user_id", 10], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 4], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 4], ["ta_id", 1], ["start", 2017-04-03 08:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 4], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 4], ["ta_id", 1], ["start", 2017-04-05 10:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 5], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 5], ["ta_id", 1], ["start", 2017-04-06 17:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (13.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 5], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 5], ["ta_id", 1], ["start", 2017-04-07 16:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 2], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 2], ["ta_id", 2], ["start", 2017-04-06 17:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 2], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 2], ["ta_id", 2], ["start", 2017-04-03 12:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 2], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 2], ["ta_id", 2], ["start", 2017-04-05 15:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 2], ["user_id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 2], ["ta_id", 6], ["start", 2017-04-04 14:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 2], ["user_id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 2], ["ta_id", 6], ["start", 2017-04-05 13:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (8.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 2], ["user_id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 2], ["ta_id", 6], ["start", 2017-04-05 10:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 1], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["ta_id", 2], ["start", 2017-04-03 10:00:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 1], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["ta_id", 2], ["start", 2017-04-02 12:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 1], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["ta_id", 2], ["start", 2017-04-07 09:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 1], ["user_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["ta_id", 3], ["start", 2017-04-03 10:00:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 1], ["user_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["ta_id", 3], ["start", 2017-04-06 10:30:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", false], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (7.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 1], ["user_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["ta_id", 3], ["start", 2017-04-05 12:00:00 UTC], ["end", 2017-05-15 04:26:41 UTC], ["online", true], ["created_at", 2017-05-15 04:26:41 UTC], ["updated_at", 2017-05-15 04:26:41 UTC]]
+  [1m[35m (11.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 3], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["ta_id", 4], ["start", 2017-04-03 10:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (11.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 3], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["ta_id", 4], ["start", 2017-04-05 12:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 3], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["ta_id", 4], ["start", 2017-04-03 13:30:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 3], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["ta_id", 8], ["start", 2017-04-03 09:30:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (12.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.4ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 3], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["ta_id", 8], ["start", 2017-04-04 11:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (8.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 4], ["user_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 4], ["ta_id", 5], ["start", 2017-04-05 12:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 4], ["user_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 4], ["ta_id", 5], ["start", 2017-04-03 10:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 4], ["user_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 4], ["ta_id", 5], ["start", 2017-04-04 13:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (6.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 7], ["user_id", 8], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 7], ["ta_id", 8], ["start", 2017-04-04 15:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 7], ["user_id", 10], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 7], ["ta_id", 10], ["start", 2017-04-05 11:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 7], ["user_id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 7], ["ta_id", 9], ["start", 2017-04-04 14:00:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.2ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ? LIMIT ?[0m  [["course_id", 7], ["user_id", 9], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "officehours" ("course_id", "ta_id", "start", "end", "online", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 7], ["ta_id", 9], ["start", 2017-04-06 09:30:00 UTC], ["end", 2017-05-15 04:26:42 UTC], ["online", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (15.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."student_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? LIMIT ?[0m  [["ta_id", 2], ["student_id", 5], ["course_id", 1], ["start", 2017-05-15 12:30:00 UTC], ["LIMIT", 1]]
+  [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? AND "appointments"."confirmed" = ? LIMIT ?[0m  [["ta_id", 2], ["course_id", 1], ["start", 2017-05-15 12:30:00 UTC], ["confirmed", true], ["LIMIT", 1]]
+  [1m[36mEnrollmentTa Load (0.0ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 1], ["LIMIT", 1]]
+  [1m[36mEnrollment Load (0.0ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 5], ["course_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "appointments" ("course_id", "student_id", "ta_id", "start", "end", "confirmed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["student_id", 5], ["ta_id", 2], ["start", 2017-05-15 12:30:00 UTC], ["end", 2018-01-13 00:00:00 UTC], ["confirmed", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."student_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? LIMIT ?[0m  [["ta_id", 3], ["student_id", 1], ["course_id", 1], ["start", 2017-05-16 14:30:00 UTC], ["LIMIT", 1]]
+  [1m[36mAppointment Load (0.0ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? AND "appointments"."confirmed" = ? LIMIT ?[0m  [["ta_id", 3], ["course_id", 1], ["start", 2017-05-16 14:30:00 UTC], ["confirmed", true], ["LIMIT", 1]]
+  [1m[36mEnrollmentTa Load (0.0ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 3], ["course_id", 1], ["LIMIT", 1]]
+  [1m[36mEnrollment Load (0.0ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 1], ["course_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "appointments" ("course_id", "student_id", "ta_id", "start", "end", "confirmed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 1], ["student_id", 1], ["ta_id", 3], ["start", 2017-05-16 14:30:00 UTC], ["end", 2018-02-23 00:00:00 UTC], ["confirmed", false], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."student_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? LIMIT ?[0m  [["ta_id", 8], ["student_id", 2], ["course_id", 3], ["start", 2017-05-17 17:00:00 UTC], ["LIMIT", 1]]
+  [1m[36mAppointment Load (0.0ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? AND "appointments"."confirmed" = ? LIMIT ?[0m  [["ta_id", 8], ["course_id", 3], ["start", 2017-05-17 17:00:00 UTC], ["confirmed", true], ["LIMIT", 1]]
+  [1m[36mEnrollmentTa Load (0.0ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 3], ["LIMIT", 1]]
+  [1m[36mEnrollment Load (0.0ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "appointments" ("course_id", "student_id", "ta_id", "start", "end", "confirmed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["student_id", 2], ["ta_id", 8], ["start", 2017-05-17 17:00:00 UTC], ["end", 2017-10-20 00:00:00 UTC], ["confirmed", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."student_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? LIMIT ?[0m  [["ta_id", 8], ["student_id", 2], ["course_id", 3], ["start", 2017-05-16 20:30:00 UTC], ["LIMIT", 1]]
+  [1m[36mAppointment Load (0.0ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."course_id" = ? AND "appointments"."start" = ? AND "appointments"."confirmed" = ? LIMIT ?[0m  [["ta_id", 8], ["course_id", 3], ["start", 2017-05-16 20:30:00 UTC], ["confirmed", true], ["LIMIT", 1]]
+  [1m[36mEnrollmentTa Load (0.0ms)[0m  [1m[34mSELECT  "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."user_id" = ? AND "enrollment_tas"."course_id" = ? LIMIT ?[0m  [["user_id", 8], ["course_id", 3], ["LIMIT", 1]]
+  [1m[36mEnrollment Load (0.0ms)[0m  [1m[34mSELECT  "enrollments".* FROM "enrollments" WHERE "enrollments"."user_id" = ? AND "enrollments"."course_id" = ? LIMIT ?[0m  [["user_id", 2], ["course_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "appointments" ("course_id", "student_id", "ta_id", "start", "end", "confirmed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["course_id", 3], ["student_id", 2], ["ta_id", 8], ["start", 2017-05-16 20:30:00 UTC], ["end", 2017-08-28 00:00:00 UTC], ["confirmed", true], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (12.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.4ms)[0m  [1m[34mSELECT "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ?[0m  [["course_id", 2], ["user_id", 2]]
+  [1m[36mEnrollment Load (0.1ms)[0m  [1m[34mSELECT "enrollments".* FROM "enrollments" WHERE "enrollments"."course_id" = ? AND "enrollments"."user_id" = ?[0m  [["course_id", 2], ["user_id", 1]]
+  [1m[35mSQL (2.0ms)[0m  [1m[32mINSERT INTO "reviews" ("student_id", "ta_id", "score", "review", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["student_id", 1], ["ta_id", 2], ["score", 3.0], ["review", "3 am happy with 1"], ["course_id", 2], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (12.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ?[0m  [["course_id", 5], ["user_id", 1]]
+  [1m[36mEnrollment Load (0.0ms)[0m  [1m[34mSELECT "enrollments".* FROM "enrollments" WHERE "enrollments"."course_id" = ? AND "enrollments"."user_id" = ?[0m  [["course_id", 5], ["user_id", 5]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "reviews" ("student_id", "ta_id", "score", "review", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["student_id", 5], ["ta_id", 1], ["score", 4.0], ["review", "2 am happy with 1"], ["course_id", 5], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (13.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mEnrollmentTa Load (0.3ms)[0m  [1m[34mSELECT "enrollment_tas".* FROM "enrollment_tas" WHERE "enrollment_tas"."course_id" = ? AND "enrollment_tas"."user_id" = ?[0m  [["course_id", 4], ["user_id", 1]]
+  [1m[36mEnrollment Load (0.0ms)[0m  [1m[34mSELECT "enrollments".* FROM "enrollments" WHERE "enrollments"."course_id" = ? AND "enrollments"."user_id" = ?[0m  [["course_id", 4], ["user_id", 3]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "reviews" ("student_id", "ta_id", "score", "review", "course_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["student_id", 3], ["ta_id", 1], ["score", 5.0], ["review", "4 am happy with 1"], ["course_id", 4], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (12.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mConversation Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "conversations" WHERE "conversations"."sender_id" = ? AND "conversations"."recipient_id" = ? LIMIT ?[0m  [["sender_id", 2], ["recipient_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "conversations" ("recipient_id", "sender_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["recipient_id", 1], ["sender_id", 2], ["created_at", 2017-05-15 04:26:42 UTC], ["updated_at", 2017-05-15 04:26:42 UTC]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2017-05-15 00:27:07 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at /mnt/c/Users/berko/Documents/Adi Berkowitz/TA/app/controllers/application_controller.rb:3)
+DEPRECATION WARNING: skip_before_filter is deprecated and will be removed in Rails 5.1. Use skip_before_action instead. (called from <class:UsersController> at /mnt/c/Users/berko/Documents/Adi Berkowitz/TA/app/controllers/users_controller.rb:3)
+Processing by UsersController#show as HTML
+Completed 401 Unauthorized in 42ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:27:07 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (176.4ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_sidebar.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 6025ms (Views: 6001.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:27:16 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:16 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:16 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:16 -0400
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:27:21 -0400
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Kd9XuMtAZm5LZvvfpdri8JsAiUNKOifmBwDOdILBjcppLnlJ9RccDEBcKngBzgC+VTFPRowl/uQGoWCJhTJpOQ==", "user"=>{"email"=>"adi@brandeis.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "adi@brandeis.edu"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (5.1ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", 2017-05-15 04:27:22 UTC], ["last_sign_in_at", 2017-05-15 04:27:22 UTC], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", 2017-05-15 04:27:22 UTC], ["id", 2]]
+  [1m[35m (17.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 603ms (ActiveRecord: 24.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-15 00:27:22 -0400
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mAppointment Load (0.5ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 2], ["confirmed", true]]
+  [1m[36mAppointment Load (0.5ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", true]]
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT "courses".* FROM "courses" INNER JOIN "enrollments" ON "courses"."id" = "enrollments"."course_id" WHERE "enrollments"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mOfficehour Load (0.5ms)[0m  [1m[34mSELECT "officehours".* FROM "officehours" WHERE "officehours"."ta_id" = ?[0m  [["ta_id", 2]]
+  [1m[36mOfficehour Load (0.4ms)[0m  [1m[34mSELECT "officehours".* FROM "officehours" WHERE "officehours"."course_id" = ?[0m  [["course_id", 3]]
+  [1m[36mOfficehour Load (0.3ms)[0m  [1m[34mSELECT "officehours".* FROM "officehours" WHERE "officehours"."course_id" = ?[0m  [["course_id", 4]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 2]]
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.7ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 1]]
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendered shared/_online.html.erb (0.5ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 8]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 5]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered shared/_online.html.erb (0.1ms)
+  [1m[36mCACHE (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 4]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 8]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 5]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendered shared/_online.html.erb (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendered shared/_online.html.erb (0.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 5]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered shared/_online.html.erb (0.0ms)
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."ta_id" = ?[0m  [["ta_id", 2]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."ta_id" = ? ORDER BY "reviews"."id" ASC LIMIT ?[0m  [["ta_id", 2], ["LIMIT", 1]]
+  Rendered users/_cal_create.html.erb (555.5ms)
+  Rendered shared/_online.html.erb (0.1ms)
+  [1m[36mCourse Load (0.9ms)[0m  [1m[34mSELECT "courses".* FROM "courses" INNER JOIN "enrollment_tas" ON "courses"."id" = "enrollment_tas"."course_id" WHERE "enrollment_tas"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 2], ["confirmed", true]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 2], ["confirmed", true]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 2], ["confirmed", false]]
+  Rendered users/_student_appointments.html.erb (15.8ms)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", true]]
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", false]]
+  [1m[36mAppointment Load (0.5ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", false]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered users/_ta_appointments.html.erb (12.2ms)
+  Rendered users/show.html.erb within layouts/application (640.7ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.6ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "enrollment_tas" ON "users"."id" = "enrollment_tas"."user_id" WHERE "enrollment_tas"."course_id" = ?[0m  [["course_id", 3]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "enrollment_tas" ON "users"."id" = "enrollment_tas"."user_id" WHERE "enrollment_tas"."course_id" = ?[0m  [["course_id", 4]]
+  Rendered layouts/_sidebar.html.erb (16.0ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 1062ms (Views: 988.2ms | ActiveRecord: 26.3ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:27:24 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:24 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Registered connection (Z2lkOi8vdGEvVXNlci8y)
+ConversationChannel is transmitting the subscription confirmation
+ConversationChannel is streaming from conversations-2
+Started POST "/confirm_appointment" for 127.0.0.1 at 2017-05-15 00:27:30 -0400
+Processing by AppointmentsController#confirm_app as JS
+  Parameters: {"utf8"=>"✓", "confirmed"=>"true", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (4.2ms)[0m  [1m[33mUPDATE "appointments" SET "confirmed" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["confirmed", true], ["updated_at", 2017-05-15 04:27:30 UTC], ["id", 1]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  Rendering users/confirm_app.js.erb
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", true]]
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", true]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", false]]
+  Rendered users/_ta_appointments.html.erb (9.4ms)
+  Rendered users/confirm_app.js.erb (15.9ms)
+Completed 200 OK in 60ms (Views: 35.5ms | ActiveRecord: 14.7ms)
+
+
+Started POST "/unconfirm_appointment" for 127.0.0.1 at 2017-05-15 00:27:31 -0400
+Processing by AppointmentsController#unconfirm_app as JS
+  Parameters: {"utf8"=>"✓", "confirmed"=>"false", "id"=>"1", "button"=>""}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (3.4ms)[0m  [1m[33mUPDATE "appointments" SET "confirmed" = ?, "updated_at" = ? WHERE "appointments"."id" = ?[0m  [["confirmed", false], ["updated_at", 2017-05-15 04:27:31 UTC], ["id", 1]]
+  [1m[35m (7.0ms)[0m  [1m[36mcommit transaction[0m
+  Rendering users/confirm_app.js.erb
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", true]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", false]]
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 2], ["confirmed", false]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered users/_ta_appointments.html.erb (8.7ms)
+  Rendered users/confirm_app.js.erb (14.7ms)
+Completed 200 OK in 53ms (Views: 31.7ms | ActiveRecord: 13.5ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2017-05-15 00:27:45 -0400
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"HRbnDltxjBv5xfQhQwc7ndCna831A3JFbGysI4c/WkPwVpqKs2NbPnkhgyh1dRSDcVx73Z+TYrzxsEFJ7Xq44w=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 13ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-15 00:27:45 -0400
+Processing by UsersController#show as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:27:45 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (132.0ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_sidebar.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 237ms (Views: 236.3ms | ActiveRecord: 0.0ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:45 -0400
+ConversationChannel stopped streaming from conversations-2
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:27:45 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:46 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:46 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:46 -0400
+Started GET "/users/sign_up" for 127.0.0.1 at 2017-05-15 00:27:47 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.5ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (13.0ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_sidebar.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 131ms (Views: 129.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-15 00:27:54 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"l914nfJOxKSoDpWx2jT5E1mHXOeAqoceraexMVooCiz69eU9n3lqNp62PCA/NcPS/6B0X4USWkbPEgNqSYVHvA==", "user"=>{"email"=>"berkowitzadi@gmail.com", "username"=>"adiberk", "first_name"=>"Adi", "last_name"=>"Berkowitz", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "berkowitzadi@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "adiberk"], ["LIMIT", 1]]
+  [1m[35mSQL (3.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "username", "created_at", "updated_at", "email", "encrypted_password", "confirmation_token", "confirmation_sent_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Adi"], ["last_name", "Berkowitz"], ["username", "adiberk"], ["created_at", 2017-05-15 04:27:54 UTC], ["updated_at", 2017-05-15 04:27:54 UTC], ["email", "berkowitzadi@gmail.com"], ["encrypted_password", "$2a$11$1lRTR71621kPpIYSF5Te9u/jlIgBART/xe6wp2p1cLRqSgepn4kve"], ["confirmation_token", "yP2uPfyC2RBes9TMJDzP"], ["confirmation_sent_at", 2017-05-15 04:27:54 UTC]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  Rendering devise/mailer/confirmation_instructions.html.erb
+  Rendered devise/mailer/confirmation_instructions.html.erb (0.8ms)
+Devise::Mailer#confirmation_instructions: processed outbound mail in 433.6ms
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:27:55 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:55 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:55 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:55 -0400
+Sent mail to berkowitzadi@gmail.com (2168.3ms)
+Date: Mon, 15 May 2017 00:27:55 -0400
+From: brandeis.taondemand@gmail.com
+Reply-To: brandeis.taondemand@gmail.com
+To: berkowitzadi@gmail.com
+Message-ID: <59192e4b3078c_58a33ffffd3dae0477888@Adi.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome berkowitzadi@gmail.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3000/users/confirmation?confirmation_token=yP2uPfyC2RBes9TMJDzP">Confirm my account</a></p>
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 2809ms (ActiveRecord: 11.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-15 00:27:57 -0400
+Processing by UsersController#show as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:27:57 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (11.7ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_sidebar.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 127ms (Views: 125.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:27:58 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:58 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:58 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:27:58 -0400
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:28:07 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:07 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:07 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:07 -0400
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:28:20 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:20 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:20 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:20 -0400
+Started GET "/users/confirmation?confirmation_token=yP2uPfyC2RBes9TMJDzP" for 127.0.0.1 at 2017-05-15 00:28:23 -0400
+Processing by Devise::ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"yP2uPfyC2RBes9TMJDzP"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["confirmation_token", "yP2uPfyC2RBes9TMJDzP"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[33mUPDATE "users" SET "confirmed_at" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["confirmed_at", 2017-05-15 04:28:23 UTC], ["updated_at", 2017-05-15 04:28:23 UTC], ["id", 26]]
+  [1m[35m (13.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users/sign_in
+Completed 302 Found in 25ms (ActiveRecord: 15.1ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:28:23 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (9.1ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_sidebar.html.erb (1.5ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 118ms (Views: 116.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:28:24 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:24 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:24 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:24 -0400
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:28:26 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:26 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:26 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:26 -0400
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:28:30 -0400
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5Fokl+7guDjSXcUWY37+xn1I1m/nuJ8AexeTL/51lSGJcrk3g9cWquTlbIeGf8QH22/+1+IAQlgZoiF07djYsQ==", "user"=>{"email"=>"berkowitzadi@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "berkowitzadi@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (3.3ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", 2017-05-15 04:28:31 UTC], ["last_sign_in_at", 2017-05-15 04:28:31 UTC], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", 2017-05-15 04:28:31 UTC], ["id", 26]]
+  [1m[35m (7.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 156ms (ActiveRecord: 10.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-15 00:28:31 -0400
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 26], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mAppointment Load (1.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 26], ["confirmed", true]]
+  [1m[36mAppointment Load (1.8ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."ta_id" = ? AND "appointments"."confirmed" = ?[0m  [["ta_id", 26], ["confirmed", true]]
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT "courses".* FROM "courses" INNER JOIN "enrollments" ON "courses"."id" = "enrollments"."course_id" WHERE "enrollments"."user_id" = ?[0m  [["user_id", 26]]
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "officehours" WHERE "officehours"."ta_id" = ?[0m  [["ta_id", 26]]
+  Rendered users/_cal_create.html.erb (25.0ms)
+  Rendered shared/_online.html.erb (0.3ms)
+  [1m[36mCourse Load (1.2ms)[0m  [1m[34mSELECT "courses".* FROM "courses" INNER JOIN "enrollment_tas" ON "courses"."id" = "enrollment_tas"."course_id" WHERE "enrollment_tas"."user_id" = ?[0m  [["user_id", 26]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 26], ["confirmed", true]]
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "appointments" WHERE "appointments"."student_id" = ? AND "appointments"."confirmed" = ?[0m  [["student_id", 26], ["confirmed", false]]
+  Rendered users/_student_appointments.html.erb (6.0ms)
+  Rendered users/show.html.erb within layouts/application (53.5ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_sidebar.html.erb (0.6ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 180ms (Views: 162.3ms | ActiveRecord: 8.5ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:28:31 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:31 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 26], ["LIMIT", 1]]
+Registered connection (Z2lkOi8vdGEvVXNlci8yNg)
+ConversationChannel is transmitting the subscription confirmation
+ConversationChannel is streaming from conversations-26
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2017-05-15 00:28:35 -0400
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"IbAeEBI6nU3jlSLP6vbOQnToJogAgyxXaRJK5RLjDVEeim8pT3W61GMGgL4ToU77X0nO5xWkhFZxe+fgQvgM+g=="}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 26], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-05-15 00:28:35 -0400
+Processing by UsersController#show as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 00:28:35 -0400
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (17.8ms)
+  Rendered layouts/_shim.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_sidebar.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 131ms (Views: 129.8ms | ActiveRecord: 0.0ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:35 -0400
+ConversationChannel stopped streaming from conversations-26
+Started GET "/cable" for 127.0.0.1 at 2017-05-15 00:28:36 -0400
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:36 -0400
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+An unauthorized connection attempt was rejected
+Failed to upgrade to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:36 -0400
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2017-05-15 00:28:36 -0400

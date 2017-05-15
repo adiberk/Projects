@@ -1,0 +1,71 @@
+<%if user_signed_in?%>
+		<%=create_header(@days)%>
+		<div class = 'days-wrapper-user'>
+			<div class = 'hour-header'>
+			<%(0..parseHours(@hours).length-1).each do |count|%>
+				<div class = "hour-header-item <%=parseHours(@hours)[count]%>">
+					<h5 class = 'time-slots'><%=parseHours(@hours)[count]%></h5>
+				</div>
+			<% end %>
+			</div>
+			<%tas= current_user%>
+			<%studentapp = current_user.student_appointments.where(confirmed: true)%>
+			<%ta_apps = current_user.ta_appointments.where(confirmed: true)%>
+			<%studentapp= studentapp + ta_apps%>
+			<%(0..@days.length-1).each do |count|%>
+				<div class = "day <%=@days[count]%>">
+
+				<%officehours = current_user.officehours%>
+				<%mycourses = current_user.courses%>
+				<%mycourses.each do |course|%>
+					<%officehours = officehours + course.officehours%>
+				<%end%>
+				<%correct_hour = nil%>
+				<%(0..parseHours(@hours).length-1).each do |jcount|%>
+					<%correct_hour = off_hour(officehours, count, jcount)%>
+					<%correct_app = nil%>
+					<%if studentapp.size > 0%>
+						<%correct_app = off_hour(studentapp, count, jcount)%>
+					<%end%>
+					<%hours = parseHours(@hours)[jcount]%>
+					<%if correct_hour!=nil%>
+						<div id = "cal-table" class = "hour correct_hour <%=parseHours(@hours)[jcount]%>">
+							<div class = 'time-added'>
+								<h5 class = 'offhour' style = "margin-bottom:0px"><%=User.find(correct_hour.ta_id).first_name%>: <%=Course.find(correct_hour.course_id).abbrev%>
+								<%if correct_hour.online == true%>
+									<%=render 'shared/online'%>
+								<%end%>
+								</h5>
+								<h5 style = "margin-top:0px">
+								<%hold = User.find(correct_hour.ta_id).ta_reviews%>
+								<%if hold.size > 0%>
+									<%hold = create_rating_icon(hold.first.score)%>
+								<%else%>
+									<%hold = create_rating_icon(nil)%>
+								<%end%>
+								 <%=hold%>
+								</h5>
+							</div>
+						</div>
+						<%correct_hour = nil%>
+					<% else %>
+						<%if correct_app!=nil && correct_app.start > Time.now%>
+							<div id = 'cal-table' class = "hour appointment_hour <%=parseHours(@hours)[jcount]%>" >
+								<div class = 'time-added'>
+									<h5 class = 'offhour'><%="Appointment with "%><%=User.find(correct_app.ta_id).first_name%>
+									</h5>
+								</div>
+							</div>
+							<%correct_app= nil%>
+						<%else%>
+							<div class = 'hour <%=parseHours(@hours)[jcount]%>', id = 'cal-table'>
+								<div class = 'time-added'>
+								</div>
+							</div>
+						<% end %>
+					<% end %>
+				<%end%>
+				</div>
+			<% end %>
+		</div>
+<%end%>

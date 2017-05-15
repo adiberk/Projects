@@ -1,0 +1,38 @@
+
+<div class="col-sm-10">
+  <h1>TA LIST</h1>
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'London')">Normal</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">Category by Course</button>
+  </div>
+
+  <div id="London" class="tabcontent" style=display:block>
+    <div class="col-sm-9">
+      <div class="col-sm-2">
+        <%= form_tag("#", method: "get") do %>
+          <%= label_tag(:q, "Search for:") %>
+          <%= text_field_tag 'search_name', nil ,:placeholder => 'First or Last Name' %>
+
+        <% end %>
+      </div>
+      <div class="col-sm-10" id="talist1">
+      <%= render 'partial' %>
+      </div>
+    </div>
+  </div>
+
+  <div id="Paris" class="tabcontent">
+    <div class="col-sm-9">
+      <div class="col-sm-2">
+        <%= form_tag("#", method: "get") do %>
+          <%= label_tag(:q, "Search for:") %>
+          <%= text_field_tag 'search_course_name', nil ,:placeholder => 'Course Name' %>
+
+        <% end %>
+      </div>
+      <div class="col-sm-10" id="talist2">
+      <%= render 'partial2' %>
+      </div>
+    </div>
+  </div>
+</div>

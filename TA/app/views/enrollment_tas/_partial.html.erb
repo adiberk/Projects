@@ -1,0 +1,28 @@
+<form action="/taprofile" method="GET">
+    <table class="table">
+        <thead>
+           <tr>
+             <th>Name</th>
+             <th>Email</th>
+             <th>Course</th>
+             <th>Profile</th>
+           </tr>
+        </thead>
+        <tbody>
+           <% for num in @ta_list %>
+             <% each_user=User.find(num)%>
+             <tr>
+               <td><%= each_user['first_name']%> <%= each_user['last_name']%></td>
+               <td><%= each_user['email']%></td>
+               <td><%= find_tacourses_from_user(each_user) %> </td>
+               <td>
+
+                 <button type="submit" class="btn btn-primary" value="<%= each_user['id'] %>" name = "ta_id">TA Profile</button>
+
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+
+ </form>

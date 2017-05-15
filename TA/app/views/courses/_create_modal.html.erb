@@ -1,0 +1,41 @@
+<div class='modal fade' id='myModal' role='dialog' data-keyboard="false" data-backdrop="static">
+  <div class='modal-dialog'>
+  
+    <!-- Modal content-->
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        <h4 class='modal-title'>Appointment Request</h4>
+      </div>
+      <div class='modal-body'>
+        <%appointment = current_user.student_appointments.new()%>
+        <%= bootstrap_form_for(appointment, :url=>request_appointment_path, action: 'request_app') do |f| %>
+            <%= f.hidden_field :course_id, :value=> params[:course].id %>
+            <%= f.hidden_field :student_id, :value=> current_user.id%>
+            <%=f.collection_select :ta_id, params[:course].tas, 'id', 'first_name', class:'selectpicker'%>
+            <%t = params[:hours].split(":")%>
+            <%d = params[:days].split(" ")%>
+            <% if params[:hours].include? "PM"%>
+            	<%if t[0].to_i == 12%>
+	            	<%= f.datetime_select :start, order:[:month, :day, :year], :default => {hour:t[0].to_i, minute: t[1][0..1].to_i, day: d[1].split("/")[0][0..1].to_i, month: d[1].split("/")[1][0..1].to_i, year: d[1].split("/")[2][0..1].to_i }, ampm: true, minute_step:30%>
+	            <%else%>
+	            	<%= f.datetime_select :start, order:[:month, :day, :year], :default => {hour:t[0].to_i+12, minute: t[1][0..1].to_i, day: d[1].split("/")[0][0..1].to_i, month: d[1].split("/")[1][0..1].to_i, year: d[1].split("/")[2][0..1].to_i}, ampm: true, minute_step:30%>
+	            <% end %>
+            <%else%>
+            	<%= f.datetime_select :start, order:[:month, :day, :year], :default => {hour:t[0].to_i, minute:t[1][0..1].to_i, day: d[1].split("/")[0][0..1].to_i, month: d[1].split("/")[1][0..1].to_i, year: d[1].split("/")[2][0..1].to_i}, ampm: true, minute_step:30%>
+            <%end%>
+            <%=f.hidden_field :end, :value => DateTime.now%>
+            <%=f.hidden_field :confirmed, :value=> false%>
+            <%=f.submit 'Request Appointment', "data-disable-with": 'Requesting please wait...'%>
+        <% end %>
+      </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+
+</script>

@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+<% provide(:title, @course) %>
+
+
+<div class="container-fluid main-contain">
+  <div class="row">
+    <div class="col-xs-9">
+      <p>
+        <h3> <%=@course.name%></h3>
+        <h5> <strong>Professor:</strong> <%=@course.teacher%> </h5>
+        <p><strong>Course description:</strong> <%=@course.description.to_s%></p>
+        <p>
+          <%=render 'shared/online'%><%= "Online"%>
+        </p>
+      </p>
+      <div class = 'row'>    
+      </div>
+      <br><br>
+    </div>
+
+    <div class = "col-lg-10">
+      <div id="target" style="margin-right:0px;padding-right:90px; width: 1000px; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; overflow-x:auto;">
+        <%= render 'cal_create', :locals=> {course:@course}%>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class = 'row participants' >
+    <div class = "col-sm-4">
+      <p>
+        <strong>Students</strong>
+        <ul>
+           <%= get_student_list(@course) %>
+        </ul>
+      </p>
+    </div>
+    <div class = "col-sm-4">
+      <p>
+        <strong> Teaching Assistants </strong>
+        <ul>
+          <%= get_ta_list(@course) %>
+        </ul>
+      </p> 
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.schedule').on('selectionmade', function() {
+    console.log("Selection Made");
+
+  }).on('selectionremoved', function() {
+    console.log("Selection Removed");
+  });
+  $(document).ready( function() {
+    var mousedown = false;
+    var devarionMode = false;
+    $('.hour').on('mousedown', function(event) {
+      if (!$(this).children().children().hasClass('offhour')){ 
+        $(this).children().children('div:nth-child(2)').modal('show');
+      }
+    })
+  });
+</script>

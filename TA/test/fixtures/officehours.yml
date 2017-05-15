@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 1
+  ta_id: 1
+  start: 2017-03-28 21:44:54
+  end: 2017-03-28 21:44:54
+  online: false
+
+two:
+  course_id: 1
+  ta_id: 1
+  start: 2017-03-28 21:44:54
+  end: 2017-03-28 21:44:54
+  online: false

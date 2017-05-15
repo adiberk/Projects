@@ -1,0 +1,32 @@
+<div class='modal fade' id='myModal' role='dialog' data-keyboard="false" data-backdrop="static">
+  <div class='modal-dialog'>
+  
+    <!-- Modal content-->
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        <h4 class='modal-title'>Office Hour</h4>
+      </div>
+      <div class='modal-body'>
+        <%@officehour = params[:office_hour]%>
+
+        <%= bootstrap_form_for(@officehour) do |f| %>
+            <%= f.hidden_field :id, :value=>@officehour.id%>
+            <%= f.hidden_field :course_id, :value=>@officehour.course_id %>
+            <%= f.hidden_field :ta_id, :value=> current_user.id%>
+            <%= f.datetime_select :start, order:[:month, :day, :year], ampm:true, minute_step:30, :value=>@officehour.start%>
+            <%=f.hidden_field :end, :value => @officehour.end%>
+            <%=f.check_box :online, :default=> false%>
+            <%=f.submit 'Update Office Hour', "data-disable-with": 'Changing office hour please wait...'%>
+        <% end %>
+      </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<script>
+
+</script>

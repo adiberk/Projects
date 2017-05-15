@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TA</title>
+
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all',
+                                              'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <%= render 'layouts/header' %>
+        <% flash.each do |message_type, message| %>
+          <%if message_type == "alert"%>
+            <%message_type ="danger"%>
+          <% end %>
+          <%if message_type == "notice"%>
+            <%message_type = "success"%>
+          <% end %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+
+      </div>
+      <div class="row">
+        <%= render 'layouts/sidebar' %>
+        <%= yield %>
+        <br>
+        <br>
+        <br>
+        <br>
+        <%= render 'layouts/footer' %>
+      </div>
+    </div>
+
+    </div>
+  </body>
+
+</html>

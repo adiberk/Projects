@@ -1,0 +1,49 @@
+
+<div class="col-sm-10">
+
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading ">
+        <h3 class="panel-title">Chat Rooms</h3>
+      </div>
+      <div class="panel-body chatdiv">
+
+        <h4 > TA's </h4>
+        <ul>
+          <% @ta_list.each do |k, v| %>
+            <li class="online_sym">
+              <%= button_to k.first_name + " (#{v})", conversations_path(user_id: k), remote: true, method: :post, class: 'chatlist' %>
+            </li>
+            <% if k.online %>
+              <li class="online_sym"> <%= render 'partial' %> </li>
+            <% end %>
+          <% end %>
+        </ul>
+
+
+        
+        <% if @student_list.empty? %>
+        <% else %>
+          <h4 class="chat_section"> Students </h4>
+          <ul>
+            <% @student_list.each do |user| %>
+              <li class="online_sym">
+                <%= button_to user.first_name + "", conversations_path(user_id: user), remote: true, method: :post, class: 'chatlist' %>
+              </li>
+            <% end %>
+
+          </ul>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <ul id="conversations-list">
+      <% @conversations.each do |conversation| %>
+        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<%userta = current_user.ta_appointments%>
+<div class="col-sm-6">
+	<div class="box">
+		<div class="icon">
+			<div class="image"><i class="fa fa-check-square-o"></i></div>
+			<div class="info">
+				<h3 class="title">Confirmed Appointments</h3>
+        <p style="list-style-type:none">
+        <%listed = false%>
+        <% taapps = userta.where(confirmed: true)%>
+        <% if (taapps.size > 0)%>
+          <%taapps.each do |app|%>
+            <%if app.start > Time.now && app.confirmed == true%>
+              <%listed = true%>
+              <p>Appointment between <%=User.find(app.ta_id).first_name%> and <%=User.find(app.student_id).first_name%> for course: <%=Course.find(app.course_id).name%> Time: <%=app.start.strftime('%y-%m-%d at %I:%M:%S%p')%>
+                <%=form_tag unconfirm_appointment_path, method:'post', id:'confirm_app', remote:true do%>
+                  <%=hidden_field_tag :confirmed, false%>
+                  <%=hidden_field_tag :id, app.id%>
+                  <%= button_tag("Cancel", type: "submit", class: "btn btn-default-confirm")%>
+                  <%end%>
+              </p>
+            <%end%>
+          <%end%>
+        <% end %>
+        <%if listed == false%>
+          <p>No confirmed appointments</p>
+        <% end %>
+        </p>
+
+			</div>
+		</div>
+		<div class="space"></div>
+	</div>
+</div>
+
+<div class="col-sm-6">
+	<div class="box">
+		<div class="icon">
+		    <div class="image"><i class="fa fa-square-o"></i></div>
+			  <div class="info">
+					<h3 class="title">Unconfirmed Appointments</h3>
+          <p>
+          <%listed = false%>
+          <% taapps = userta.where(confirmed: false)%>
+            <% if taapps.size > 0%>
+              <% taapps.each do |app|%>
+                <%if app.start> Time.now && app.confirmed == false%>
+                  <%listed = true%>
+                  <p>Appointment between <%=User.find(app.ta_id).first_name%> and <%=User.find(app.student_id).first_name%> for course: <%=Course.find(app.course_id).name%> Time: <%=app.start.strftime('%y-%m-%d at %I:%M:%S%p')%>
+
+                  <%=form_tag confirm_appointment_path, method:'post', id:'confirm_app', remote:true do%>
+                      <%=hidden_field_tag :confirmed, true%>
+                      <%=hidden_field_tag :id, app.id%>
+                      <%= button_tag("Confirm", type: "Confirm", class: "btn btn-default-confirm") %>
+                  <%end%>
+                  </p>
+              <%end%>
+            <% end %>
+          <% end %>
+          <% if listed== false%>
+            <p>No unconfirmed appointments at this time</p>
+          <% end %>
+          </p>
+			  </div>
+		  <div class="space"></div>
+	  </div>
+  </div>
+</div>
